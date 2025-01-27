@@ -9,6 +9,7 @@ from PIL import Image
 from io import BytesIO
 
 app = Flask(__name__)
+version = "0.0.2"
 
 @app.route('/', methods=['GET', 'POST'])
 def upload_image():
@@ -51,9 +52,9 @@ def upload_image():
         qr_img.save(buffer, format='PNG')
         image_base64 = base64.b64encode(buffer.getvalue()).decode('utf-8')
         
-        return render_template('results.html', processed_image=image_base64)
+        return render_template('results.html', processed_image=image_base64, version=version)
     
-    return render_template('index.html')
+    return render_template('index.html', version=version)
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', debug=True)
