@@ -8,28 +8,24 @@
     />
     {% block head %}{% endblock %}
   </head>
-    <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
-      <div class="container">
+  <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
+    <div class="container">
+      <div class="d-flex justify-content-between w-100">  
         <a class="btn btn-primary" href="/">Generate New QR Code</a>
-        <a
-          class="github-button"
-          href="https://github.com/the-real-cphillips"
-          data-color-scheme="no-preference: dark; light: light_high_contrast; dark: dark_high_contrast;"
-          data-size="large"
-          aria-label="Follow @the-real-cphillips"
-          >Follow @the-real-cphillips</a
-        >
-        <a
-          class="github-button"
-          href="https://github.com/the-real-cphillips/qr_code"
-          data-color-scheme="no-preference: dark; light: light_high_contrast; dark: dark_high_contrast;"
-          data-size="large"
-          aria-label="Check out the repo @the-real-cphillips/qr_code"
-          >Check out the repo @the-real-cphillips/qr_code</a
-        >
-      </div>
-    </nav>
-    <div class="container mt-5">
+        <div class="d-flex align-items-center">  <a
+            class="github-button mr-2"  href="https://github.com/the-real-cphillips"
+            data-color-scheme="no-preference: dark; light: light_high_contrast; dark: dark_high_contrast;"
+            data-size="large"
+            aria-label="Follow @the-real-cphillips"
+          >Follow @the-real-cphillips</a>
+          <a
+            class="github-button"
+            href="https://github.com/the-real-cphillips/qr_code"
+            data-color-scheme="no-preference: dark; light: light_high_contrast; dark: dark_high_contrast;"
+            data-size="large"
+            aria-label="Check out the repo @the-real-cphillips/qr_code"
+          >Check out the repo @the-real-cphillips/qr_code</a>
+        </div>
       <div class="form-check form-switch mb-3">
         <input
           class="form-check-input"
@@ -39,8 +35,10 @@
         />
         <label class="form-check-label" for="darkModeToggle">Dark Mode</label>
       </div>
-      {% block content %}{% endblock %}
+      </div>
     </div>
+  </nav>
+      {% block content %}{% endblock %}
 
     <script>
       const toggle = document.getElementById("darkModeToggle");
