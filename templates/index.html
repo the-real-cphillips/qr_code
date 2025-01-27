@@ -1,22 +1,76 @@
 {% extends "base.html" %} {% block content %}
-<form method="post" enctype="multipart/form-data" class="col-md-6 mx-auto">
+<h1 class="col-md-6 mx-auto">QR Code Generator</h1>
+<form
+  method="post"
+  enctype="multipart/form-data"
+  class="col-md-6 mx-auto"
+  id="qrForm"
+  onsubmit="return validateForm(event)"
+>
   <div class="mb-3">
     <input
       type="text"
       class="form-control"
       name="url"
+      id="url"
       placeholder="Enter URL"
       required
     />
+    <div class="invalid-feedback">Please enter a valid URL</div>
   </div>
   <div class="mb-3">
     <input
       type="file"
       class="form-control"
       name="file"
+      id="file"
       accept=".png,.jpg,.jpeg,.bmp"
     />
+    <div class="invalid-feedback">
+      Please select a valid image file (PNG, JPG, JPEG, or BMP)
+    </div>
   </div>
-  <button type="submit" class="btn btn-primary">Generate QR Code</button>
+  <button type="submit" class="btn btn-success">Generate QR Code</button>
 </form>
+
+<script>
+  function validateForm(event) {
+    event.preventDefault();
+    let isValid = true;
+
+    // Get form elements
+    const urlInput = document.getElementById("url");
+    const fileInput = document.getElementById("file");
+
+    // Validate URL
+    try {
+      new URL(urlInput.value);
+      urlInput.classList.remove("is-invalid");
+    } catch (e) {
+      urlInput.classList.add("is-invalid");
+      isValid = false;
+    }
+
+    // Validate file if one is selected
+    if (fileInput.files.length > 0) {
+      const file = fileInput.files[0];
+      const validTypes = [".png", ".jpg", ".jpeg", ".bmp"];
+      const fileExtension = "." + file.name.split(".").pop().toLowerCase();
+
+      if (!validTypes.includes(fileExtension)) {
+        fileInput.classList.add("is-invalid");
+        isValid = false;
+      } else {
+        fileInput.classList.remove("is-invalid");
+      }
+    }
+
+    // If all validations pass, submit the form
+    if (isValid) {
+      document.getElementById("qrForm").submit();
+    }
+
+    return isValid;
+  }
+</script>
 {% endblock %}
